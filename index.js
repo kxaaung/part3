@@ -34,9 +34,8 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-    persons = persons.filter(p => p.id !== Number(req.params.id))
-    
-    return res.status(204).end()
+    Person.findByIdAndDelete(req.params.id)
+		.then(result => res.status(204).end())
 })
 
 app.post('/api/persons', (req, res) => {
@@ -72,5 +71,5 @@ app.use(unknowEndPoint)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`)
 })
